@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<ul>
+  <li>Javascript</li>
+  <li>Python</li>
+  <li>Cpp</li>
+</ul>
+
+<script>
+  // add
+  const li = document.createElement("li");
+  li.innerText = "Java";
+  document.querySelector("ul").appendChild(li);
+
+  // edit
+  const sec = document.querySelector("li:nth-child(2)");
+  sec.innerText = "TypeScript";
+
+  // remove
+  const last = document.querySelector("li:last-child");
+  last.remove();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1 class="head">Heading One</h1>
+<h1 class="head">Heading Two</h1>
+
+<p>Para One</p>
+<p>Para Two</p>
+
+<script>
+  console.log(document.querySelector("h1"));
+  console.log(document.querySelectorAll("h1"));
+
+  const heads = document.querySelectorAll(".head");
+  heads.forEach((h) => {
+    h.style.color = "blue";
+  });
+
+  console.log(document.getElementsByClassName("head"));
+</script>
+
+</body>
+</html>
