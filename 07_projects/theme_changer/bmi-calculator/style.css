@@ -1,0 +1,12 @@
+.container{
+    width : 525px;
+    height : 825px;
+    background-color: #797978;
+    padding-left: 30px;
+}
+#height,
+#weight{
+    width : 150px;
+    height : 25px;
+    margin-top : 30px;
+}
