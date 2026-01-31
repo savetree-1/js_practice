@@ -1,0 +1,28 @@
+name: Random Daily Commits
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+
+jobs:
+  commit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Random commits
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+
+          COUNT=$(( (RANDOM % 7) + 1 ))
+
+          for i in $(seq 1 $COUNT)
+          do
+            echo "Commit $i $(date)" >> daily.txt
+            git add daily.txt
+            git commit -m "auto commit $i"
+          done
+
+          git push
