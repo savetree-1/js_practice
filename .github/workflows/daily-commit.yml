@@ -1,0 +1,32 @@
+name: Random Time Random Commits
+
+on:
+  schedule:
+    - cron: "0 0 * * *"   # Runs once daily
+  workflow_dispatch:
+
+jobs:
+  commit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Random time commits
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+
+          COUNT=$(( (RANDOM % 7) + 1 ))
+
+          for i in $(seq 1 $COUNT)
+          do
+            DELAY=$(( RANDOM % 3600 ))   # 0–3600 seconds (0–1 hour)
+            sleep $DELAY
+
+            echo "Commit $i at $(date)" >> daily.txt
+            git add daily.txt
+            git commit -m "auto commit $i"
+          done
+
+          git push
