@@ -1,0 +1,30 @@
+name: Random Daily Commits
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  commit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Create random commits
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+
+          COUNT=$(( (RANDOM % 7) + 1 ))
+
+          for i in $(seq 1 $COUNT)
+          do
+            git commit --allow-empty -m "auto commit $i"
+          done
+
+          git push
