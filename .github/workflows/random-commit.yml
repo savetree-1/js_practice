@@ -2,7 +2,7 @@ name: Random Daily Commits
 
 on:
   schedule:
-    - cron: "0 0 * * *"
+    - cron: "0 */6 * * *"
   workflow_dispatch:
 
 permissions:
@@ -15,16 +15,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Create random commits
+      - name: Create Commit
         run: |
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
+          export TZ=Asia/Kolkata
+          git config --global user.name "savetree-1"
+          git config --global user.email "143923713+savetree-1@users.noreply.github.com"
 
-          COUNT=$(( (RANDOM % 7) + 1 ))
+          date > activity.txt
+          git add activity.txt
+          git commit -m "auto commit" --date="$(date)" || echo "nothing"
+          git push origin HEAD:main
 
-          for i in $(seq 1 $COUNT)
-          do
-            git commit --allow-empty -m "auto commit $i"
-          done
-
-          git push
